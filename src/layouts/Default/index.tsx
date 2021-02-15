@@ -1,9 +1,19 @@
+import { LayoutContainer, Main, ContentPage } from './styles';
+
+import Header from '../../components/Header';
+import SideBar from '../../components/SideBar';
+
 const Default: React.FC = ({ children }) => {
   return (
-    <div>
-      <p>Default layout</p>
-      {children}
-    </div>
+    <LayoutContainer>
+      <Header />
+
+      <Main>
+        <SideBar />
+
+        <ContentPage>{children}</ContentPage>
+      </Main>
+    </LayoutContainer>
   );
 };
 

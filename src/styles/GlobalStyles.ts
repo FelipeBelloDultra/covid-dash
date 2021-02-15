@@ -4,12 +4,15 @@ export default createGlobalStyle`
   *, *:before, *:after {
     border: 0;
     margin: 0;
+    outline: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
   body {
     font-family: 'Rubik', sans-serif;
+    background-color: #E5E5E5;
+    color: #617480;
     -webkit-font-smoothing: antialiased;
   }
 
