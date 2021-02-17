@@ -67,7 +67,7 @@ export const ListSideBar = styled.ul`
 
       &:before {
         content: '';
-        height: 100%;
+        height: 0;
         width: 0;
         background-color: unset;
         left: 0;
@@ -78,6 +78,7 @@ export const ListSideBar = styled.ul`
       &:hover {
         &:before {
           width: 5px;
+          height: 100%;
           background-color: #617480;
         }
       }
@@ -87,6 +88,7 @@ export const ListSideBar = styled.ul`
 
         &:before {
           width: 5px;
+          height: 100%;
           background-color: #617480;
         }
       }
