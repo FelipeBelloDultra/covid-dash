@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useState, useCallback } from 'react';
+import { InputHTMLAttributes, useState, useCallback, useRef } from 'react';
 
 import { Container, FilterContainer } from './styles';
 
@@ -8,6 +8,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const InputFiltred: React.FC<InputProps> = ({ options }) => {
   const [filtredOption, setFiltredOption] = useState<string[]>([]);
+
+  const inputRef = useRef({} as HTMLInputElement);
 
   const handleChangeInput = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,13 +28,32 @@ const InputFiltred: React.FC<InputProps> = ({ options }) => {
     [options],
   );
 
+  const handleSelectCountry = useCallback((country: string) => {
+    inputRef.current.value = country;
+  }, []);
+
+  const handleBlurInput = useCallback(() => {
+    setTimeout(() => {
+      setFiltredOption([]);
+    }, 200);
+  }, []);
+
   return (
     <Container>
-      <input type="text" onChange={event => handleChangeInput(event)} />
+      <input
+        onBlur={() => handleBlurInput()}
+        onChange={event => handleChangeInput(event)}
+        ref={inputRef}
+        type="text"
+      />
       {filtredOption.length ? (
         <FilterContainer>
           {filtredOption.map(option => (
-            <li key={option}>{option}</li>
+            <li key={option}>
+              <button type="button" onClick={() => handleSelectCountry(option)}>
+                {option}
+              </button>
+            </li>
           ))}
         </FilterContainer>
       ) : (
