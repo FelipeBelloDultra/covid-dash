@@ -1,37 +1,15 @@
-import {
-  InputHTMLAttributes,
-  useState,
-  useCallback,
-  useRef,
-  useEffect,
-} from 'react';
-import api from '../../utils/api';
+import { InputHTMLAttributes, useState, useCallback, useRef } from 'react';
 
 import { Container, FilterContainer } from './styles';
 
-type InputProps = InputHTMLAttributes<HTMLInputElement>;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  options: string[];
+}
 
-const InputFiltred: React.FC<InputProps> = () => {
+const InputFiltred: React.FC<InputProps> = ({ options }) => {
   const [filtredOption, setFiltredOption] = useState<string[]>([]);
-  const [countriesCollection, setCountriesCollection] = useState<string[]>([]);
 
   const inputRef = useRef({} as HTMLInputElement);
-
-  async function getCountriesData() {
-    const response = await api.get('/countries');
-
-    const { countries } = response.data;
-
-    const country = countries.map((countryOption: { name: string }) => {
-      return countryOption.name;
-    });
-
-    setCountriesCollection(country);
-  }
-
-  useEffect(() => {
-    getCountriesData();
-  }, []);
 
   function handleSelectCountry(country: string) {
     inputRef.current.value = country;
@@ -46,7 +24,7 @@ const InputFiltred: React.FC<InputProps> = () => {
   const handleChangeInput = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.value) {
-        const filters = countriesCollection.filter(option => {
+        const filters = options.filter(option => {
           return option
             .toLowerCase()
             .includes(event.target.value.toLowerCase());
@@ -57,7 +35,7 @@ const InputFiltred: React.FC<InputProps> = () => {
         setFiltredOption([]);
       }
     },
-    [countriesCollection],
+    [options],
   );
 
   return (
