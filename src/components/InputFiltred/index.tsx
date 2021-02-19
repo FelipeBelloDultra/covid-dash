@@ -1,20 +1,52 @@
-import { InputHTMLAttributes, useState, useCallback, useRef } from 'react';
+import {
+  InputHTMLAttributes,
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react';
+import api from '../../utils/api';
 
 import { Container, FilterContainer } from './styles';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  options: string[];
-}
+type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
-const InputFiltred: React.FC<InputProps> = ({ options }) => {
+const InputFiltred: React.FC<InputProps> = () => {
   const [filtredOption, setFiltredOption] = useState<string[]>([]);
+  const [countriesCollection, setCountriesCollection] = useState<string[]>([]);
 
   const inputRef = useRef({} as HTMLInputElement);
+
+  async function getCountriesData() {
+    const response = await api.get('/countries');
+
+    const { countries } = response.data;
+
+    const country = countries.map((countryOption: { name: string }) => {
+      return countryOption.name;
+    });
+
+    setCountriesCollection(country);
+  }
+
+  useEffect(() => {
+    getCountriesData();
+  }, []);
+
+  function handleSelectCountry(country: string) {
+    inputRef.current.value = country;
+  }
+
+  function handleBlurInput() {
+    setTimeout(() => {
+      setFiltredOption([]);
+    }, 200);
+  }
 
   const handleChangeInput = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.value) {
-        const filters = options.filter(option => {
+        const filters = countriesCollection.filter(option => {
           return option
             .toLowerCase()
             .includes(event.target.value.toLowerCase());
@@ -25,28 +57,21 @@ const InputFiltred: React.FC<InputProps> = ({ options }) => {
         setFiltredOption([]);
       }
     },
-    [options],
+    [countriesCollection],
   );
-
-  const handleSelectCountry = useCallback((country: string) => {
-    inputRef.current.value = country;
-  }, []);
-
-  const handleBlurInput = useCallback(() => {
-    setTimeout(() => {
-      setFiltredOption([]);
-    }, 200);
-  }, []);
 
   return (
     <Container>
       <input
         onBlur={() => handleBlurInput()}
         onChange={event => handleChangeInput(event)}
+        placeholder="Select a country..."
         ref={inputRef}
+        max="255"
         type="text"
       />
-      {filtredOption.length ? (
+
+      {filtredOption.length !== 0 && (
         <FilterContainer>
           {filtredOption.map(option => (
             <li key={option}>
@@ -56,8 +81,6 @@ const InputFiltred: React.FC<InputProps> = ({ options }) => {
             </li>
           ))}
         </FilterContainer>
-      ) : (
-        <h1>NO</h1>
       )}
     </Container>
   );
