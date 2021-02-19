@@ -8,6 +8,9 @@ import { Container, FormContainer } from './styles';
 
 const Dashboard: React.FC = () => {
   const [countriesCollection, setCountriesCollection] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState<string>('');
+
+  console.log(inputValue);
 
   const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,7 +35,10 @@ const Dashboard: React.FC = () => {
   return (
     <Container>
       <FormContainer onSubmit={event => handleSubmit(event)}>
-        <InputFiltred options={countriesCollection} />
+        <InputFiltred
+          options={countriesCollection}
+          setInputValue={setInputValue}
+        />
 
         <button type="submit">Get Data</button>
       </FormContainer>

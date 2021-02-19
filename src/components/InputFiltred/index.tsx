@@ -4,15 +4,18 @@ import { Container, FilterContainer } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   options: string[];
+  setInputValue(option: string): void;
 }
 
-const InputFiltred: React.FC<InputProps> = ({ options }) => {
+const InputFiltred: React.FC<InputProps> = ({ options, setInputValue }) => {
   const [filtredOption, setFiltredOption] = useState<string[]>([]);
 
   const inputRef = useRef({} as HTMLInputElement);
 
   function handleSelectCountry(country: string) {
     inputRef.current.value = country;
+
+    setInputValue(country);
   }
 
   function handleBlurInput() {
@@ -31,11 +34,13 @@ const InputFiltred: React.FC<InputProps> = ({ options }) => {
         });
 
         setFiltredOption(filters);
+
+        setInputValue(event.target.value);
       } else {
         setFiltredOption([]);
       }
     },
-    [options],
+    [options, setInputValue],
   );
 
   return (
