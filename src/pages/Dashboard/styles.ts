@@ -40,7 +40,8 @@ export const FormContainer = styled.form`
 export const InfoContainer = styled.aside`
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
+  margin-top: 30px;
 
   .alert {
     background: #fff7e0;
@@ -59,4 +60,13 @@ export const InfoContainer = styled.aside`
       text-decoration: underline;
     }
   }
+`;
+
+export const InfoDetail = styled.div`
+  width: 410px;
+  padding: 20px;
+  max-height: 410px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #dce2e6;
 `;

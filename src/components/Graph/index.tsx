@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-import { Container, ContainerGraph } from './styles';
+import { ContainerGraph } from './styles';
 
 interface GraphProps {
   values: {
@@ -37,18 +37,16 @@ const Graph: React.FC<GraphProps> = ({ values }) => {
   }, [values]);
 
   return (
-    <Container>
+    <div>
       <ContainerGraph>
         <Doughnut
           options={{
             maintainAspectRatio: false,
           }}
           data={dataGraph}
-          height={410}
-          width={410}
         />
       </ContainerGraph>
-    </Container>
+    </div>
   );
 };
 

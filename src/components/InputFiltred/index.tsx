@@ -8,24 +8,25 @@ import {
 
 import { Container, FilterContainer } from './styles';
 
+import { useRegion } from '../../hooks/Cases';
+
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  options: string[];
   setInputValue(option: string): void;
 }
 
-const InputFiltred: React.FC<InputProps> = ({ options, setInputValue }) => {
+const InputFiltred: React.FC<InputProps> = ({ setInputValue }) => {
   const [filtredOption, setFiltredOption] = useState<string[]>([]);
 
-  const inputRef = useRef({} as HTMLInputElement);
+  const { countriesCollection } = useRegion();
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
+  const inputRef = useRef({} as HTMLInputElement);
 
   function handleSelectCountry(country: string) {
     inputRef.current.value = country;
 
     setInputValue(country);
+
+    inputRef.current.focus();
   }
 
   function handleBlurInput() {
@@ -34,10 +35,18 @@ const InputFiltred: React.FC<InputProps> = ({ options, setInputValue }) => {
     }, 200);
   }
 
+  useEffect(() => {
+    inputRef.current.focus();
+
+    return () => {
+      setFiltredOption([]);
+    };
+  }, []);
+
   const handleChangeInput = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.value) {
-        const filters = options.filter(option => {
+        const filters = countriesCollection.filter(option => {
           return option
             .toLowerCase()
             .includes(event.target.value.toLowerCase());
@@ -52,7 +61,7 @@ const InputFiltred: React.FC<InputProps> = ({ options, setInputValue }) => {
         setInputValue('');
       }
     },
-    [options, setInputValue],
+    [countriesCollection, setInputValue],
   );
 
   return (
