@@ -3,7 +3,7 @@ import { Container } from './styles';
 const Header: React.FC = () => {
   return (
     <Container>
-      <span>[Button Toggle Theme]</span>
+      <button type="button">[Button Toggle Theme]</button>
     </Container>
   );
 };

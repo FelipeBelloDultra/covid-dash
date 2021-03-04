@@ -4,6 +4,13 @@ export const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px 20px 20px;
+  }
 `;
 
 export const FormContainer = styled.form`

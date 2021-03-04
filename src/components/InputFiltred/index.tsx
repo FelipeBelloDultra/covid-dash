@@ -1,4 +1,10 @@
-import { InputHTMLAttributes, useState, useCallback, useRef } from 'react';
+import {
+  InputHTMLAttributes,
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react';
 
 import { Container, FilterContainer } from './styles';
 
@@ -11,6 +17,10 @@ const InputFiltred: React.FC<InputProps> = ({ options, setInputValue }) => {
   const [filtredOption, setFiltredOption] = useState<string[]>([]);
 
   const inputRef = useRef({} as HTMLInputElement);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   function handleSelectCountry(country: string) {
     inputRef.current.value = country;
@@ -38,6 +48,8 @@ const InputFiltred: React.FC<InputProps> = ({ options, setInputValue }) => {
         setInputValue(event.target.value);
       } else {
         setFiltredOption([]);
+
+        setInputValue('');
       }
     },
     [options, setInputValue],

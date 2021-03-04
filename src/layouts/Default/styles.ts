@@ -14,6 +14,7 @@ export const Main = styled.div`
 
 export const ContentPage = styled.div`
   flex: 1;
-  padding: 20px;
+  padding-top: 20px;
   transition: transform 0.5s;
+  height: 100%;
 `;

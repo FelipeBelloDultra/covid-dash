@@ -1,4 +1,10 @@
-import { createContext, useState, useCallback, useContext } from 'react';
+import {
+  createContext,
+  useState,
+  useCallback,
+  useContext,
+  useMemo,
+} from 'react';
 
 import api from '../utils/api';
 
@@ -15,8 +21,9 @@ interface GetRegionData {
 }
 
 interface CasesContextData {
-  informationsValues: object;
+  informationsValues: Data;
   getInformationsData(region: GetRegionData): Promise<void>;
+  lastUpdate: string | null;
 }
 
 const CasesContext = createContext<CasesContextData>({} as CasesContextData);
@@ -38,9 +45,19 @@ const CasesProvider: React.FC = ({ children }) => {
     });
   }, []);
 
+  const lastUpdate = useMemo(() => {
+    if (data.lastUpdate) {
+      const date = new Date(data.lastUpdate);
+
+      return date.toLocaleDateString('pt-br');
+    }
+
+    return null;
+  }, [data]);
+
   return (
     <CasesContext.Provider
-      value={{ informationsValues: data, getInformationsData }}
+      value={{ informationsValues: data, getInformationsData, lastUpdate }}
     >
       {children}
     </CasesContext.Provider>

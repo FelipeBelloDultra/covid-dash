@@ -27,6 +27,7 @@ export const FilterContainer = styled.ul`
   padding: 10px;
   border: 1px solid #dce2e6;
   position: absolute;
+  z-index: 9999;
 
   li {
     margin: 0 -10px;
