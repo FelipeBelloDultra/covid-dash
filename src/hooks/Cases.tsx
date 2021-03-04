@@ -32,17 +32,27 @@ const CasesProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<Data>({} as Data);
 
   const getInformationsData = useCallback(async ({ region }) => {
-    const response = await api.get(`/countries/${region}`);
+    if (!region) {
+      setData({
+        confirmed: 0,
+        deaths: 0,
+        lastUpdate: '',
+        recovered: 0,
+        region: '',
+      });
+    } else {
+      const response = await api.get(`/countries/${region}`);
 
-    const { confirmed, deaths, lastUpdate, recovered } = response.data;
+      const { confirmed, deaths, lastUpdate, recovered } = response.data;
 
-    setData({
-      confirmed: confirmed.value,
-      deaths: deaths.value,
-      lastUpdate,
-      recovered: recovered.value,
-      region,
-    });
+      setData({
+        confirmed: confirmed.value,
+        deaths: deaths.value,
+        lastUpdate,
+        recovered: recovered.value,
+        region,
+      });
+    }
   }, []);
 
   const lastUpdate = useMemo(() => {

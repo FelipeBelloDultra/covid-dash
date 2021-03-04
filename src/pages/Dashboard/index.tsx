@@ -7,13 +7,13 @@ import { useRegion } from '../../hooks/Cases';
 
 import api from '../../utils/api';
 
-import { Container, FormContainer } from './styles';
+import { Container, FormContainer, InfoContainer } from './styles';
 
 const Dashboard: React.FC = () => {
   const [countriesCollection, setCountriesCollection] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
 
-  const { getInformationsData, lastUpdate } = useRegion();
+  const { getInformationsData, lastUpdate, informationsValues } = useRegion();
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
@@ -54,12 +54,27 @@ const Dashboard: React.FC = () => {
 
         {lastUpdate && (
           <span>
-            Last update: <span className="date"> {lastUpdate}</span>
+            Last update: <strong> {lastUpdate}</strong>
           </span>
         )}
       </div>
 
-      <Graph />
+      <InfoContainer>
+        {informationsValues.region ? (
+          <Graph
+            values={{
+              confirmed: informationsValues.confirmed,
+              deaths: informationsValues.deaths,
+              recovered: informationsValues.recovered,
+              region: informationsValues.region,
+            }}
+          />
+        ) : (
+          <div className="alert">
+            <span>No region selected</span>
+          </div>
+        )}
+      </InfoContainer>
     </Container>
   );
 };

@@ -1,24 +1,25 @@
 import { useMemo } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-import { useRegion } from '../../hooks/Cases';
-
 import { Container, ContainerGraph } from './styles';
 
-const Graph: React.FC = () => {
-  const { informationsValues } = useRegion();
+interface GraphProps {
+  values: {
+    region: string;
+    confirmed: number;
+    deaths: number;
+    recovered: number;
+  };
+}
 
+const Graph: React.FC<GraphProps> = ({ values }) => {
   const dataGraph = useMemo(() => {
     return {
       maintainAspectRatio: false,
       labels: ['Confirmed', 'Deaths', 'Recovered'],
       datasets: [
         {
-          data: [
-            informationsValues.confirmed,
-            informationsValues.deaths,
-            informationsValues.recovered,
-          ],
+          data: [values.confirmed, values.deaths, values.recovered],
           backgroundColor: [
             'rgba(255, 206, 86, 0.2)',
             'rgba(255, 99, 132, 0.2)',
@@ -33,21 +34,19 @@ const Graph: React.FC = () => {
         },
       ],
     };
-  }, [informationsValues]);
+  }, [values]);
 
   return (
     <Container>
       <ContainerGraph>
-        {informationsValues.region && (
-          <Doughnut
-            options={{
-              maintainAspectRatio: false,
-            }}
-            data={dataGraph}
-            height={400}
-            width={400}
-          />
-        )}
+        <Doughnut
+          options={{
+            maintainAspectRatio: false,
+          }}
+          data={dataGraph}
+          height={410}
+          width={410}
+        />
       </ContainerGraph>
     </Container>
   );
