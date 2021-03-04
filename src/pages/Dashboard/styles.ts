@@ -69,4 +69,13 @@ export const InfoDetail = styled.div`
   background: #fff;
   border-radius: 5px;
   border: 1px solid #dce2e6;
+
+  span {
+    display: block;
+    font-size: 14px;
+
+    & + span {
+      margin-top: 20px;
+    }
+  }
 `;

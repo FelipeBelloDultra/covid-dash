@@ -50,21 +50,38 @@ const Dashboard: React.FC = () => {
         {informationsValues.region ? (
           <>
             <InfoDetail>
-              <p>
-                <strong>Region:</strong> {informationsValues.region}
-              </p>
-              <p>
-                <strong>Confirmed:</strong>{' '}
-                {informationsValues.confirmed.toLocaleString('pt-BR')}
-              </p>
-              <p>
-                <strong>Deaths:</strong>{' '}
-                {informationsValues.deaths.toLocaleString('pt-BR')}
-              </p>
-              <p>
-                <strong>Recovered:</strong>{' '}
-                {informationsValues.recovered.toLocaleString('pt-BR')}
-              </p>
+              <span>
+                Region:
+                <strong> {informationsValues.region}</strong>
+              </span>
+              <span>
+                Confirmed:{' '}
+                <strong>
+                  {informationsValues.confirmed.toLocaleString('pt-BR')}
+                </strong>
+              </span>
+              <span>
+                Deaths:{' '}
+                <strong>
+                  {informationsValues.deaths.toLocaleString('pt-BR')}
+                </strong>
+              </span>
+              <span>
+                Recovered:{' '}
+                <strong>
+                  {informationsValues.recovered.toLocaleString('pt-BR')}
+                </strong>
+              </span>
+              <span>
+                Total:{' '}
+                <strong>
+                  {(
+                    informationsValues.recovered +
+                    informationsValues.confirmed +
+                    informationsValues.deaths
+                  ).toLocaleString('pt-BR')}
+                </strong>
+              </span>
             </InfoDetail>
 
             <Graph
