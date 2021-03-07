@@ -49,6 +49,15 @@ const Dashboard: React.FC = () => {
       <InfoContainer>
         {informationsValues.region ? (
           <>
+            <Graph
+              values={{
+                confirmed: informationsValues.confirmed,
+                deaths: informationsValues.deaths,
+                recovered: informationsValues.recovered,
+                region: informationsValues.region,
+              }}
+            />
+
             <InfoDetail>
               <span>
                 Region:
@@ -83,15 +92,6 @@ const Dashboard: React.FC = () => {
                 </strong>
               </span>
             </InfoDetail>
-
-            <Graph
-              values={{
-                confirmed: informationsValues.confirmed,
-                deaths: informationsValues.deaths,
-                recovered: informationsValues.recovered,
-                region: informationsValues.region,
-              }}
-            />
           </>
         ) : (
           <div className="alert">
