@@ -6,6 +6,8 @@ import {
   useMemo,
 } from 'react';
 
+import { useLoader } from './Loader';
+
 import api from '../utils/api';
 
 interface Data {
@@ -35,6 +37,8 @@ const CasesProvider: React.FC = ({ children }) => {
   const [countriesCollection, setCountriesCollection] = useState<string[]>([]);
   const [data, setData] = useState<Data>({} as Data);
 
+  const { toggleLoader } = useLoader();
+
   const resetData = useCallback(() => {
     setData({
       confirmed: 0,
@@ -46,30 +50,49 @@ const CasesProvider: React.FC = ({ children }) => {
   }, []);
 
   const getRegions = useCallback(async () => {
-    const response = await api.get('/countries');
+    try {
+      toggleLoader(true);
 
-    const { countries } = response.data;
+      const response = await api.get('/countries');
 
-    const country = countries.map((countryOption: { name: string }) => {
-      return countryOption.name;
-    });
+      const { countries } = response.data;
 
-    setCountriesCollection(country);
-  }, []);
+      const country = countries.map((countryOption: { name: string }) => {
+        return countryOption.name;
+      });
 
-  const getInformationsData = useCallback(async ({ region }) => {
-    const response = await api.get(`/countries/${region}`);
+      setCountriesCollection(country);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      toggleLoader(false);
+    }
+  }, [toggleLoader]);
 
-    const { confirmed, deaths, lastUpdate, recovered } = response.data;
+  const getInformationsData = useCallback(
+    async ({ region }) => {
+      try {
+        toggleLoader(true);
 
-    setData({
-      confirmed: confirmed.value,
-      deaths: deaths.value,
-      lastUpdate,
-      recovered: recovered.value,
-      region,
-    });
-  }, []);
+        const response = await api.get(`/countries/${region}`);
+
+        const { confirmed, deaths, lastUpdate, recovered } = response.data;
+
+        setData({
+          confirmed: confirmed.value,
+          deaths: deaths.value,
+          lastUpdate,
+          recovered: recovered.value,
+          region,
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        toggleLoader(false);
+      }
+    },
+    [toggleLoader],
+  );
 
   const lastUpdate = useMemo(() => {
     if (data.lastUpdate) {

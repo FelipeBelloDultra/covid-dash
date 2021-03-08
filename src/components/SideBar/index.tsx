@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import { NavLink } from 'react-router-dom';
 import { FiChevronsLeft } from 'react-icons/fi';
@@ -12,15 +12,14 @@ const SideBar: React.FC = () => {
 
   const { colors } = useTheme();
 
-  const handleToggleSideBar = useCallback(() => {
+  function handleToggleSideBar() {
     setOpenSideBar(prev => !prev);
-  }, []);
+  }
 
   return (
     <Container isClose={!openSideBar}>
       <ButtonToggleSideBar>
         <button type="button" onClick={handleToggleSideBar}>
-          {/* <FiChevronsLeft size={35} color="#617480" /> */}
           <FiChevronsLeft size={35} color={colors.tertiaryColor} />
         </button>
       </ButtonToggleSideBar>
