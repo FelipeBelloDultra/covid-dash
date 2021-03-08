@@ -3,10 +3,14 @@ import { useCallback, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FiChevronsLeft } from 'react-icons/fi';
 
+import { useTheme } from '../../hooks/Themes';
+
 import { Container, ButtonToggleSideBar, ListSideBar } from './styles';
 
 const SideBar: React.FC = () => {
   const [openSideBar, setOpenSideBar] = useState(true);
+
+  const { colors } = useTheme();
 
   const handleToggleSideBar = useCallback(() => {
     setOpenSideBar(prev => !prev);
@@ -16,7 +20,8 @@ const SideBar: React.FC = () => {
     <Container isClose={!openSideBar}>
       <ButtonToggleSideBar>
         <button type="button" onClick={handleToggleSideBar}>
-          <FiChevronsLeft size={35} color="#617480" />
+          {/* <FiChevronsLeft size={35} color="#617480" /> */}
+          <FiChevronsLeft size={35} color={colors.tertiaryColor} />
         </button>
       </ButtonToggleSideBar>
 
