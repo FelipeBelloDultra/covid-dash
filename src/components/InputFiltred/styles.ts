@@ -6,7 +6,7 @@ export const Container = styled.div`
   input {
     height: 45px;
     width: 300px;
-    border: 1px solid #dce2e6;
+    border: 1px solid ${props => props.theme.fourthColor};
     padding: 0 15px;
     border-radius: 5px;
     font-size: 14px;
@@ -25,7 +25,7 @@ export const FilterContainer = styled.ul`
   overflow-y: scroll;
   background: #fff;
   padding: 10px;
-  border: 1px solid #dce2e6;
+  border: 1px solid ${props => props.theme.fourthColor};
   position: absolute;
   z-index: 9999;
 
@@ -42,14 +42,13 @@ export const FilterContainer = styled.ul`
       background-color: unset;
       left: 0;
       position: absolute;
-      transition: all 0.2s;
     }
 
     &:hover {
       &:before {
         width: 5px;
         height: 100%;
-        background-color: #617480;
+        background-color: ${props => props.theme.tertiaryColor};
       }
     }
 
@@ -61,7 +60,7 @@ export const FilterContainer = styled.ul`
       height: 100%;
       width: 100%;
       font-size: 14px;
-      color: #617480;
+      color: ${props => props.theme.tertiaryColor};
       text-align: left;
     }
   }

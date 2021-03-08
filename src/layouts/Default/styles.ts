@@ -18,4 +18,5 @@ export const ContentPage = styled.div`
   transition: transform 0.5s;
   height: 100%;
   width: 100%;
+  background: ${props => props.theme.primaryColor};
 `;

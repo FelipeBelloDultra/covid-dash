@@ -7,8 +7,8 @@ interface ContainerProps {
 export const Container = styled.div<ContainerProps>`
   width: 235px;
   height: 100%;
-  background-color: #dedede;
-  border-right: 1px solid #dce2e6;
+  background-color: ${props => props.theme.secondaryColor};
+  border-right: 1px solid ${props => props.theme.fourthColor};
   transition: margin 0.5s;
 
   ${props =>
@@ -58,12 +58,11 @@ export const ListSideBar = styled.ul`
       margin: 0 10px;
       display: flex;
       align-items: center;
-      color: #617480;
+      color: ${props => props.theme.tertiaryColor};
       text-decoration: none;
       font-weight: 700;
       position: relative;
       font-size: 18px;
-      transition: all 0.2s;
 
       &:before {
         content: '';
@@ -72,24 +71,23 @@ export const ListSideBar = styled.ul`
         background-color: unset;
         left: 0;
         position: absolute;
-        transition: all 0.2s;
       }
 
       &:hover {
         &:before {
           width: 5px;
           height: 100%;
-          background-color: #617480;
+          background-color: ${props => props.theme.tertiaryColor};
         }
       }
 
       &.nav-is-active {
-        background-color: #e5e5e5;
+        background-color: ${props => props.theme.primaryColor};
 
         &:before {
           width: 5px;
           height: 100%;
-          background-color: #617480;
+          background-color: ${props => props.theme.tertiaryColor};
         }
       }
     }

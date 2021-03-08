@@ -12,6 +12,7 @@ export const Container = styled.div`
 
     span {
       user-select: none;
+      color: ${props => props.theme.tertiaryColor};
     }
   }
 `;
@@ -28,8 +29,7 @@ export const FormContainer = styled.form`
     top: 45px;
     font-weight: 500;
     color: #fff;
-    background: #617480;
-    transition: all 0.2s;
+    background: ${props => props.theme.tertiaryColor};
 
     &:hover {
       opacity: 0.8;
@@ -68,11 +68,12 @@ export const InfoDetail = styled.div`
   max-height: 410px;
   background: #fff;
   border-radius: 5px;
-  border: 1px solid #dce2e6;
+  border: 1px solid ${props => props.theme.fourthColor};
 
   span {
     display: block;
     font-size: 14px;
+    color: ${props => props.theme.tertiaryColor};
 
     & + span {
       margin-top: 20px;

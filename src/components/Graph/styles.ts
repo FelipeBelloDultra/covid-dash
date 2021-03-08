@@ -8,5 +8,5 @@ export const ContainerGraph = styled.div`
   margin-right: 0;
   background-color: #fff;
   border-radius: 5px;
-  border: 1px solid #dce2e6;
+  border: 1px solid ${props => props.theme.fourthColor};
 `;
