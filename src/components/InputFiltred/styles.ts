@@ -61,7 +61,7 @@ export const FilterContainer = styled.ul`
       height: 100%;
       width: 100%;
       font-size: 14px;
-      color: #000;
+      color: #617480;
       text-align: left;
     }
   }
