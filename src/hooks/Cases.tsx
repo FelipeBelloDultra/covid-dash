@@ -7,6 +7,7 @@ import {
 } from 'react';
 
 import { useLoader } from './Loader';
+import { useToast } from './Toast';
 
 import api from '../utils/api';
 
@@ -38,6 +39,7 @@ const CasesProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<Data>({} as Data);
 
   const { toggleLoader } = useLoader();
+  const { addToast } = useToast();
 
   const resetData = useCallback(() => {
     setData({
@@ -63,18 +65,21 @@ const CasesProvider: React.FC = ({ children }) => {
 
       setCountriesCollection(country);
     } catch (error) {
-      console.log(error);
+      addToast({
+        type: 'error',
+        title: 'Opss..',
+      });
     } finally {
       toggleLoader(false);
     }
-  }, [toggleLoader]);
+  }, [toggleLoader, addToast]);
 
   const getInformationsData = useCallback(
     async ({ region }) => {
       try {
         toggleLoader(true);
 
-        const response = await api.get(`/countries/${region}`);
+        const response = await api.get(`/counstries/${region}`);
 
         const { confirmed, deaths, lastUpdate, recovered } = response.data;
 
@@ -86,12 +91,15 @@ const CasesProvider: React.FC = ({ children }) => {
           region,
         });
       } catch (error) {
-        console.log(error);
+        addToast({
+          type: 'error',
+          title: 'Opss..',
+        });
       } finally {
         toggleLoader(false);
       }
     },
-    [toggleLoader],
+    [toggleLoader, addToast],
   );
 
   const lastUpdate = useMemo(() => {
