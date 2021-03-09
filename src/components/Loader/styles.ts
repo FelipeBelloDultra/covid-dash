@@ -26,6 +26,8 @@ export const Container = styled.div`
 
     img {
       display: block;
+      user-select: none;
+      pointer-events: none;
     }
   }
 `;

@@ -39,11 +39,14 @@ export const Container = styled(animated.div)<ContainerProps>`
 
   div {
     flex: 1;
+    user-select: none;
+
     p {
       margin-top: 4px;
       font-size: 14px;
       opacity: 0.8;
       line-height: 20px;
+      user-select: none;
     }
   }
 
