@@ -79,7 +79,7 @@ const CasesProvider: React.FC = ({ children }) => {
       try {
         toggleLoader(true);
 
-        const response = await api.get(`/counstries/${region}`);
+        const response = await api.get(`/countries/${region}`);
 
         const { confirmed, deaths, lastUpdate, recovered } = response.data;
 
