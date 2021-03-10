@@ -73,7 +73,7 @@ export const InfoDetail = styled.div`
   span {
     display: block;
     font-size: 14px;
-    color: ${props => props.theme.tertiaryColor};
+    color: ${props => props.theme.colorText};
 
     & + span {
       margin-top: 20px;

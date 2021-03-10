@@ -12,6 +12,7 @@ interface Color {
   secondaryColor: string;
   tertiaryColor: string;
   fourthColor: string;
+  colorText: string;
   default: 'white' | 'black';
   white: '#fff';
   black: '#000';
@@ -54,16 +55,18 @@ const ThemesProvider: React.FC = ({ children }) => {
         secondaryColor: '#dedede',
         tertiaryColor: '#617480',
         fourthColor: '#dce2e6',
+        colorText: '#617480',
         default: 'white',
         black: '#000',
         white: '#fff',
       };
     }
     return {
-      primaryColor: '#da4545',
-      secondaryColor: '#98c007',
-      tertiaryColor: '#2d7db1',
-      fourthColor: '#c631f3',
+      primaryColor: '#424242',
+      secondaryColor: '#121212',
+      tertiaryColor: '#bdbdbd',
+      fourthColor: '#636363',
+      colorText: '#444',
       default: 'black',
       black: '#000',
       white: '#fff',

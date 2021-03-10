@@ -48,7 +48,7 @@ export const FilterContainer = styled.ul`
       &:before {
         width: 5px;
         height: 100%;
-        background-color: ${props => props.theme.tertiaryColor};
+        background-color: ${props => props.theme.colorText};
       }
     }
 
@@ -60,7 +60,7 @@ export const FilterContainer = styled.ul`
       height: 100%;
       width: 100%;
       font-size: 14px;
-      color: ${props => props.theme.tertiaryColor};
+      color: ${props => props.theme.colorText};
       text-align: left;
     }
   }
