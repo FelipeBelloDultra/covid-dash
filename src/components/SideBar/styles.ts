@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 
 interface ContainerProps {
   isClose: boolean;
+  isMobile: boolean;
+  open: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -9,10 +11,11 @@ export const Container = styled.div<ContainerProps>`
   height: 100%;
   background-color: ${props => props.theme.secondaryColor};
   border-right: 1px solid ${props => props.theme.fourthColor};
-  transition: margin 0.5s;
+  transition: all 0.5s;
 
   ${props =>
     props.isClose &&
+    !props.isMobile &&
     css`
       margin-left: -180px;
 
@@ -28,6 +31,24 @@ export const Container = styled.div<ContainerProps>`
         &.nav-is-active {
           background-color: unset;
         }
+      }
+    `}
+
+  ${props =>
+    props.isMobile &&
+    css`
+        position: fixed;
+        top: 0;
+        z-index: 10000;
+        left: -235px;
+      }
+    `}
+
+  ${props =>
+    props.open &&
+    css`
+        left: 0;
+        box-shadow: 4px 4px 13px -3px rgba(0,0,0,0.6);
       }
     `}
 `;

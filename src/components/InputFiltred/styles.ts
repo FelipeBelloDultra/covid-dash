@@ -12,6 +12,16 @@ export const Container = styled.div`
     font-size: 14px;
     color: #000;
   }
+
+  @media (max-width: 1130px) {
+    width: 100%;
+    max-width: 300px;
+
+    input {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
 `;
 
 export const FilterContainer = styled.ul`

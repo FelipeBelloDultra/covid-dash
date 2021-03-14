@@ -15,6 +15,13 @@ export const Container = styled.div`
       color: ${props => props.theme.tertiaryColor};
     }
   }
+
+  @media (max-width: 1130px) {
+    > div {
+      flex-direction: column;
+      align-items: unset;
+    }
+  }
 `;
 
 export const FormContainer = styled.form`
@@ -35,6 +42,18 @@ export const FormContainer = styled.form`
       opacity: 0.8;
     }
   }
+
+  @media (max-width: 1130px) {
+    margin-bottom: 20px;
+    max-width: 420px;
+    width: 100%;
+
+    button {
+      margin-left: 20px;
+      max-width: 100px;
+      width: 100%;
+    }
+  }
 `;
 
 export const InfoContainer = styled.aside`
@@ -48,7 +67,8 @@ export const InfoContainer = styled.aside`
     border-radius: 5px;
     padding: 0 30px;
     flex: 1;
-    height: 50px;
+    min-height: 50px;
+    width: 100%;
     display: flex;
     align-items: center;
 
@@ -59,6 +79,10 @@ export const InfoContainer = styled.aside`
       user-select: none;
       text-decoration: underline;
     }
+  }
+
+  @media (max-width: 1130px) {
+    flex-direction: column-reverse;
   }
 `;
 
@@ -78,5 +102,12 @@ export const InfoDetail = styled.div`
     & + span {
       margin-top: 20px;
     }
+  }
+
+  @media (max-width: 1130px) {
+    margin-bottom: 30px;
+    max-height: unset;
+    height: auto;
+    width: 100%;
   }
 `;

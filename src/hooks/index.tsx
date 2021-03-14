@@ -2,13 +2,16 @@ import { ToastProvider } from './Toast';
 import { LoaderProvider } from './Loader';
 import { CasesProvider } from './Cases';
 import { ThemesProvider } from './Themes';
+import { IsMobileProvider } from './IsMobile';
 
 const AppProvider: React.FC = ({ children }) => {
   return (
     <ToastProvider>
       <LoaderProvider>
         <CasesProvider>
-          <ThemesProvider>{children}</ThemesProvider>
+          <IsMobileProvider>
+            <ThemesProvider>{children}</ThemesProvider>
+          </IsMobileProvider>
         </CasesProvider>
       </LoaderProvider>
     </ToastProvider>

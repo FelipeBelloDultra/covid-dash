@@ -9,4 +9,9 @@ export const ContainerGraph = styled.div`
   background-color: #fff;
   border-radius: 5px;
   border: 1px solid ${props => props.theme.fourthColor};
+
+  @media (max-width: 1130px) {
+    height: auto;
+    width: 100%;
+  }
 `;

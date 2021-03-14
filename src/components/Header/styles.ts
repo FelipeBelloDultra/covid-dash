@@ -9,6 +9,10 @@ export const Container = styled.div`
   justify-content: flex-end;
   padding: 0 30px;
 
+  .isMobile {
+    display: none;
+  }
+
   button {
     padding: 14px 20px;
     margin: 12px 0px;
@@ -20,6 +24,17 @@ export const Container = styled.div`
 
     &:hover {
       opacity: 0.8;
+    }
+  }
+
+  @media (max-width: 1130px) {
+    justify-content: space-between;
+
+    .isMobile {
+      display: flex;
+      padding: 0;
+      margin: 0;
+      background-color: transparent;
     }
   }
 `;
